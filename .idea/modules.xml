@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/UsageAnalytics.iml" filepath="$PROJECT_DIR$/UsageAnalytics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UsageAnalytics_main.iml" filepath="$PROJECT_DIR$/.idea/modules/UsageAnalytics_main.iml" group="UsageAnalytics" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UsageAnalytics_test.iml" filepath="$PROJECT_DIR$/.idea/modules/UsageAnalytics_test.iml" group="UsageAnalytics" />
+    </modules>
+  </component>
+</project>
