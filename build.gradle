@@ -26,9 +26,4 @@ repositories {
 dependencies {
 	//Spring
 	compile "org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE"
-
-	compile "org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE"
-
-	//Jersey
-	compile "com.sun.jersey:jersey-client:1.19.3"
 }
