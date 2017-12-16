@@ -7,7 +7,6 @@ import java.util.List;
 
 public class PlatformsDayUsage {
     Date date;
-    Service service;
     List<PlatformUsage> platformUsageList;
 
     public PlatformsDayUsage(Date date, List<PlatformUsage> PlatformUsageList)

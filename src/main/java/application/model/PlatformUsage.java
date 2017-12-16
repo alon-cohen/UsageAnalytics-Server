@@ -21,9 +21,9 @@ import java.util.List;
 public class PlatformUsage {
 
     private Platform platform;
-    private long usageAmount;
+    private int usageAmount;
 
-    public PlatformUsage(Platform platform, long usageAmount)
+    public PlatformUsage(Platform platform, int usageAmount)
     {
         this.platform=platform;
         this.usageAmount=usageAmount;
@@ -31,7 +31,7 @@ public class PlatformUsage {
 
     public void setPlatform (Platform platform) {this.platform=platform;}
     public Platform getPlatform () {return platform;}
-    public void setUsageAmount (Long usageAmount) {this.usageAmount=usageAmount;}
-    public Long getUsageAmount () {return  usageAmount;}
+    public void setUsageAmount (int usageAmount) {this.usageAmount=usageAmount;}
+    public int getUsageAmount () {return  usageAmount;}
 
 }

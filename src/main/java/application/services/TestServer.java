@@ -9,7 +9,12 @@ import java.util.List;
 public class TestServer {
     private static TestServer ourInstance = new TestServer();
     private List<TimeUsage> usersTimeline = new ArrayList<TimeUsage>();
-    private List<PlatformsDayUsage> platformUsageTimeline = new ArrayList<PlatformsDayUsage>();
+
+    private List<PlatformsDayUsage> platformUsageTimelineAll = new ArrayList<PlatformsDayUsage>();
+    private List<PlatformsDayUsage> platformUsageTimelineHA = new ArrayList<PlatformsDayUsage>();
+    private List<PlatformsDayUsage> platformUsageTimelineVideoSession = new ArrayList<PlatformsDayUsage>();
+    private List<PlatformsDayUsage> platformUsageTimelineVideoRecord = new ArrayList<PlatformsDayUsage>();
+    private List<PlatformsDayUsage> platformUsageTimelineSecurity = new ArrayList<PlatformsDayUsage>();
 
     public static TestServer getInstance() {
         return ourInstance;
@@ -23,8 +28,13 @@ public class TestServer {
         usersTimeline.add(timeUsage);
     }
 
-    public void addToPlatformUsageTimelineList(PlatformsDayUsage platformsDayUsage)
+    public void addToPlatformUsageTimelineLists(PlatformsDayUsage platformsDayUsageHA, PlatformsDayUsage platformsDayUsageVideoSession, PlatformsDayUsage platformsDayUsageVideoRecord, PlatformsDayUsage platformsDayUsageSecurity, PlatformsDayUsage platformsDayUsageAll)
     {
-        platformUsageTimeline.add(platformsDayUsage);
+        platformUsageTimelineHA.add(platformsDayUsageHA);
+        platformUsageTimelineVideoSession.add(platformsDayUsageVideoSession);
+        platformUsageTimelineVideoRecord.add(platformsDayUsageVideoRecord);
+        platformUsageTimelineSecurity.add(platformsDayUsageSecurity);
+        platformUsageTimelineAll.add(platformsDayUsageAll);
+
     }
 }
