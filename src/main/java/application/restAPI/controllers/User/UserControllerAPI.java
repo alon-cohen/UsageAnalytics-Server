@@ -17,4 +17,6 @@ public interface UserControllerAPI {
     @RequestMapping(path = "/{userId}" ,method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity getUser(@PathVariable(value = "userId") String userId);
 
+
+
 }
