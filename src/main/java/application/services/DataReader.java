@@ -1,9 +1,7 @@
 package application.services;
 
 import application.enums.Platform;
-import application.model.PlatformUsage;
-import application.model.PlatformsDayUsage;
-import application.model.TimeUsage;
+import application.model.*;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -45,6 +43,9 @@ public class DataReader {
                 dataMatrix.add(Arrays.asList(data.split(",")));
             }
 
+            insertDailyPlatformUsage();
+            insertAmountOfUsers();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -73,7 +74,7 @@ public class DataReader {
             platformUsageList = new ArrayList<PlatformUsage>();
             for (application.enums.Platform platform:application.enums.Platform.values())
             {
-                platformVal=countPlatformUsage(service.toString()+"_"+platform.toString());
+                platformVal=countUsage(service.toString()+"_"+platform.toString());
                 platformUsageData=new PlatformUsage(platform, platformVal);
                 platformUsageList.add(platformUsageData);
             }
@@ -108,6 +109,8 @@ public class DataReader {
         }
         platformsDayUsageAll = new PlatformsDayUsage(date, allPlatformUsageList);
 
+        server.addToPlatformUsageTimelineLists(platformsDayUsageHA, platformsDayUsageVideoSession, platformsDayUsageVideoRecord, platformsDayUsageSecurity, platformsDayUsageAll);
+
     }
 
     private void addPlatformUsageListDataToAllCount (int[] allData, List<PlatformUsage> platformUsageList)
@@ -134,7 +137,32 @@ public class DataReader {
         }
     }
 
-    private int countPlatformUsage(String platform)
+    private void insertDailyServiceUsage()
+    {
+        ServiceDayUsage serviceDayUsage = null;
+        List<ServiceUsage> serviceUsageList;
+        int serviceVal;
+        ServiceUsage serviceUsageData;
+
+        serviceUsageList = new ArrayList<ServiceUsage>();
+
+        for (application.enums.Service service : application.enums.Service.values())
+        {
+            serviceVal=0;
+            for (application.enums.Platform platform:application.enums.Platform.values())
+            {
+                serviceVal+=countUsage(service.toString()+"_"+platform.toString());
+            }
+            serviceUsageData=new ServiceUsage(service, serviceVal);
+            serviceUsageList.add(serviceUsageData);
+        }
+
+        serviceDayUsage= new ServiceDayUsage(date, serviceUsageList);
+
+        server.addToServiceUsageTimelineList(serviceDayUsage);
+    }
+
+    private int countUsage(String platform)
     {
         List<String> headers = dataMatrix.get(0);
         boolean wasFound=false;

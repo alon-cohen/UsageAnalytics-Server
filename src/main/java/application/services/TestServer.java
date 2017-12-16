@@ -1,6 +1,8 @@
 package application.services;
 
 import application.model.PlatformsDayUsage;
+import application.model.ServiceDayUsage;
+import application.model.ServiceUsage;
 import application.model.TimeUsage;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class TestServer {
     private List<PlatformsDayUsage> platformUsageTimelineVideoSession = new ArrayList<PlatformsDayUsage>();
     private List<PlatformsDayUsage> platformUsageTimelineVideoRecord = new ArrayList<PlatformsDayUsage>();
     private List<PlatformsDayUsage> platformUsageTimelineSecurity = new ArrayList<PlatformsDayUsage>();
+    private List<ServiceDayUsage> serviceUsageTimeline = new ArrayList<ServiceDayUsage>();
 
     public static TestServer getInstance() {
         return ourInstance;
@@ -36,5 +39,10 @@ public class TestServer {
         platformUsageTimelineSecurity.add(platformsDayUsageSecurity);
         platformUsageTimelineAll.add(platformsDayUsageAll);
 
+    }
+
+    public void addToServiceUsageTimelineList(ServiceDayUsage servicesDayUsage)
+    {
+        serviceUsageTimeline.add(servicesDayUsage);
     }
 }
