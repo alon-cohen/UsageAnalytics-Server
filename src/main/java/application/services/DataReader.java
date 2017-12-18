@@ -190,7 +190,62 @@ public class DataReader {
         return count;
     }
 
+    private void updateNewItemDateInServer(Date date)
+    {
+        server.updateLastUpdates(date);
+    }
 
+    public void calcAndUpdateVerticalDayUsage(String verticlStringInFile)
+    {
+        List<String> headers = dataMatrix.get(0);
+        Map<String, Integer> verticalDayUsage=new HashMap<String, Integer>();
+        boolean wasFound=false;
+        int colNum=0;
+
+        for (String str:headers)
+        {
+            if(!str.matches(verticlStringInFile)){
+                colNum++;
+            }
+            else
+            {
+                wasFound=true;
+                break;
+            }
+        }
+
+        if(wasFound)
+        {
+            for (List<String> row:dataMatrix.subList(1,dataMatrix.size()))
+            {
+                String colValueString = row.get((colNum));
+                String[] verticals = colValueString.split("|");
+                for(String vertical:verticals)
+                {
+                    if(!verticalDayUsage.containsValue(vertical))
+                    {
+                        verticalDayUsage.put(vertical, 1);
+                    }
+                    else
+                    {
+                        verticalDayUsage.put(vertical, verticalDayUsage.get(vertical)+1);
+                    }
+                }
+            }
+            List<VerticalUsage> verticalDayUsageList = getDayListUsageFromMap(verticalDayUsage);
+            server.addToVerticalDayUsageList(date,verticalDayUsageList);
+        }
+    }
+
+    private List<VerticalUsage> getDayListUsageFromMap(Map<String, Integer> verticalDayUsage)
+    {
+        List<VerticalUsage> verticalDayUsageList = new ArrayList<VerticalUsage>();
+        for(Map.Entry<String, Integer> currentNode : verticalDayUsage.entrySet())
+        {
+            verticalDayUsageList.add(new VerticalUsage(Integer.parseInt(currentNode.getKey()),currentNode.getValue()));
+        }
+        return verticalDayUsageList;
+    }
 }
 
 

@@ -1,11 +1,9 @@
 package application.services;
 
-import application.model.PlatformsDayUsage;
-import application.model.ServiceDayUsage;
-import application.model.ServiceUsage;
-import application.model.TimeUsage;
+import application.model.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TestServer {
@@ -18,6 +16,8 @@ public class TestServer {
     private List<PlatformsDayUsage> platformUsageTimelineVideoRecord = new ArrayList<PlatformsDayUsage>();
     private List<PlatformsDayUsage> platformUsageTimelineSecurity = new ArrayList<PlatformsDayUsage>();
     private List<ServiceDayUsage> serviceUsageTimeline = new ArrayList<ServiceDayUsage>();
+    private List<VerticalDayUsage> verticalDayUsageList = new ArrayList<VerticalDayUsage>();
+    private List<Date> twoLastUpdates = new ArrayList<Date>();
 
     public static TestServer getInstance() {
         return ourInstance;
@@ -44,5 +44,23 @@ public class TestServer {
     public void addToServiceUsageTimelineList(ServiceDayUsage servicesDayUsage)
     {
         serviceUsageTimeline.add(servicesDayUsage);
+    }
+
+    public void addToVerticalDayUsageList(Date date, List<VerticalUsage> verticalUsageList)
+    {
+        verticalDayUsageList.add(new VerticalDayUsage(date, verticalUsageList));
+    }
+
+    public void updateLastUpdates(Date date)
+    {
+     if(twoLastUpdates.size()<2)
+     {
+         twoLastUpdates.add(date);
+     }
+     else
+     {
+         twoLastUpdates.remove(0);
+         twoLastUpdates.add(date);
+     }
     }
 }

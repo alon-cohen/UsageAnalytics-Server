@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="UsageAnalytics-Server_main" target="1.8" />
+      <module name="UsageAnalytics-Server_test" target="1.8" />
       <module name="UsageAnalytics_main" target="1.8" />
       <module name="UsageAnalytics_test" target="1.8" />
     </bytecodeTargetLevel>
