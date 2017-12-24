@@ -12,17 +12,17 @@ import javax.persistence.Entity;
 @Entity
 public class VerticalUsage {
 
-    private int vertical;
+    private String vertical;
     private long amount;
 
-    public VerticalUsage(int vertical, long amount)
+    public VerticalUsage(String vertical, long amount)
     {
         this.vertical=vertical;
         this.amount=amount;
     }
 
-    public void setVertical (int vertical) {this.vertical=vertical;}
-    public int getVertical () {return vertical;}
+    public void setVertical (String vertical) {this.vertical=vertical;}
+    public String getVertical () {return vertical;}
     public void setAmount (Long amount) {this.amount=amount;}
     public Long getAmount () {return  amount;}
 

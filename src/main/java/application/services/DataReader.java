@@ -242,7 +242,7 @@ public class DataReader {
         List<VerticalUsage> verticalDayUsageList = new ArrayList<VerticalUsage>();
         for(Map.Entry<String, Integer> currentNode : verticalDayUsage.entrySet())
         {
-            verticalDayUsageList.add(new VerticalUsage(Integer.parseInt(currentNode.getKey()),currentNode.getValue()));
+            verticalDayUsageList.add(new VerticalUsage(currentNode.getKey(),currentNode.getValue()));
         }
         return verticalDayUsageList;
     }

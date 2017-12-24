@@ -17,19 +17,19 @@ public class VerticalsService {
     public List<VerticalUsage> getVerticalsUsage (Date date)
     {
         List<VerticalUsage> res = new ArrayList<VerticalUsage>();
-        res.add(new VerticalUsage(1234,70));
-        res.add(new VerticalUsage(1235,10));
-        res.add(new VerticalUsage(1236,53));
-        res.add(new VerticalUsage(1237,120));
+        res.add(new VerticalUsage("1234",70));
+        res.add(new VerticalUsage("1235",10));
+        res.add(new VerticalUsage("1236",53));
+        res.add(new VerticalUsage("1237",120));
         return res;
     }
 
     public List<VerticalUsage> getTopThreeVerticals ()
     {
         List<VerticalUsage> res = new ArrayList<VerticalUsage>();
-        res.add(new VerticalUsage(1234,700));
-        res.add(new VerticalUsage(1235,100));
-        res.add(new VerticalUsage(1236,530));
+        res.add(new VerticalUsage("1234",700));
+        res.add(new VerticalUsage("1235",100));
+        res.add(new VerticalUsage("1236",530));
         return res;
     }
 
