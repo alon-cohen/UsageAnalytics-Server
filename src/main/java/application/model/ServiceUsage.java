@@ -6,17 +6,8 @@ package application.model;
 // */
 //
 
-import application.enums.Platform;
 import application.enums.Service;
 
-import javax.persistence.Entity;
-
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.AuthorityUtils;
-//
-//
-
-@Entity
 public class ServiceUsage {
 
     private Service service;

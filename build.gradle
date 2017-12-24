@@ -26,4 +26,5 @@ repositories {
 dependencies {
 	//Spring
 	compile "org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE"
+	compile "org.springframework.boot:spring-boot-starter-data-mongodb"
 }

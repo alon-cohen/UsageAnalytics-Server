@@ -1,15 +1,5 @@
 package application.model;
 
-import application.enums.Platform;
-
-import javax.persistence.Entity;
-
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.AuthorityUtils;
-//
-//
-
-@Entity
 public class VerticalUsage {
 
     private String vertical;

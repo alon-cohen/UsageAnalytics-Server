@@ -6,6 +6,8 @@ import application.enums.Platform;
 import application.model.PlatformUsage;
 import application.model.ServiceUsage;
 import application.model.TimeUsage;
+import application.repositories.user.PlatformDayUsage.PlatformDayUsageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +16,9 @@ import java.util.List;
 
 @Service
 public class PlatformsService {
+
+    @Autowired
+    PlatformDayUsageRepository repository;
 
     public List<PlatformUsage> getPlatformComparisonData (Date startDate, Date endDate, application.enums.Service service)
     {

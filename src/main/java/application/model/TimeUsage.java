@@ -6,17 +6,9 @@ package application.model;
 // */
 //
 
-import application.enums.Platform;
 
-import javax.persistence.Entity;
 import java.util.Date;
 
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.AuthorityUtils;
-//
-//
-
-@Entity
 public class TimeUsage {
 
     private Date date;
