@@ -71,28 +71,28 @@ public class DataReader {
 
         for (application.enums.Service service : application.enums.Service.values())
         {
-            platformUsageList = new ArrayList<PlatformUsage>();
-            for (application.enums.Platform platform:application.enums.Platform.values())
-            {
-                platformVal=countUsage(service.toString()+"_"+platform.toString());
-                platformUsageData=new PlatformUsage(platform, platformVal);
-                platformUsageList.add(platformUsageData);
-            }
+            if (service!= application.enums.Service.ALL) {
+                platformUsageList = new ArrayList<PlatformUsage>();
+                for (application.enums.Platform platform : application.enums.Platform.values()) {
+                    platformVal = countUsage(service.toString() + "_" + platform.toString());
+                    platformUsageData = new PlatformUsage(platform, platformVal);
+                    platformUsageList.add(platformUsageData);
+                }
 
-            switch (service)
-            {
-                case HA:
-                    platformsDayUsageHA = new PlatformsDayUsage(date, platformUsageList);
-                    break;
-                case SECURITY:
-                    platformsDayUsageSecurity = new PlatformsDayUsage(date, platformUsageList);
-                    break;
-                case VIDEO_SESSION:
-                    platformsDayUsageVideoSession= new PlatformsDayUsage(date, platformUsageList);
-                    break;
-                case VIDEO_RECORD:
-                    platformsDayUsageVideoRecord = new PlatformsDayUsage(date, platformUsageList);
-                    break;
+                switch (service) {
+                    case HA:
+                        platformsDayUsageHA = new PlatformsDayUsage(date, platformUsageList);
+                        break;
+                    case SECURITY:
+                        platformsDayUsageSecurity = new PlatformsDayUsage(date, platformUsageList);
+                        break;
+                    case VIDEO_SESSION:
+                        platformsDayUsageVideoSession = new PlatformsDayUsage(date, platformUsageList);
+                        break;
+                    case VIDEO_RECORD:
+                        platformsDayUsageVideoRecord = new PlatformsDayUsage(date, platformUsageList);
+                        break;
+                }
             }
         }
 
@@ -148,13 +148,15 @@ public class DataReader {
 
         for (application.enums.Service service : application.enums.Service.values())
         {
-            serviceVal=0;
-            for (application.enums.Platform platform:application.enums.Platform.values())
+            if (service!= application.enums.Service.ALL)
             {
-                serviceVal+=countUsage(service.toString()+"_"+platform.toString());
+                serviceVal = 0;
+                for (application.enums.Platform platform : application.enums.Platform.values()) {
+                    serviceVal += countUsage(service.toString() + "_" + platform.toString());
+                }
+                serviceUsageData = new ServiceUsage(service, serviceVal);
+                serviceUsageList.add(serviceUsageData);
             }
-            serviceUsageData=new ServiceUsage(service, serviceVal);
-            serviceUsageList.add(serviceUsageData);
         }
 
         serviceDayUsage= new ServiceDayUsage(date, serviceUsageList);
@@ -233,7 +235,7 @@ public class DataReader {
                 }
             }
             List<VerticalUsage> verticalDayUsageList = getDayListUsageFromMap(verticalDayUsage);
-            server.addToVerticalDayUsageList(date,verticalDayUsageList);
+            server.addToVerticalDayUsageList(new VerticalDayUsage(date, verticalDayUsageList));
         }
     }
 

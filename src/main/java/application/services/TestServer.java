@@ -46,9 +46,9 @@ public class TestServer {
         serviceUsageTimeline.add(servicesDayUsage);
     }
 
-    public void addToVerticalDayUsageList(Date date, List<VerticalUsage> verticalUsageList)
+    public void addToVerticalDayUsageList(VerticalDayUsage verticalDayUsage)
     {
-        verticalDayUsageList.add(new VerticalDayUsage(date, verticalUsageList));
+        verticalDayUsageList.add(verticalDayUsage);
     }
 
     public void updateLastUpdates(Date date)

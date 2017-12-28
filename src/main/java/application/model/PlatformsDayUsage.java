@@ -1,5 +1,6 @@
 package application.model;
 
+import application.enums.Service;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.List;
 public class PlatformsDayUsage {
     Date date;
     List<PlatformUsage> platformUsageList;
+    Service service;
 
     public PlatformsDayUsage() {
     }
@@ -25,6 +27,10 @@ public class PlatformsDayUsage {
         this.platformUsageList = platformUsageList;
     }
 
+    public void setService (Service service) {
+        this.service=service;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -32,6 +38,8 @@ public class PlatformsDayUsage {
     public List<PlatformUsage> getPlatformUsageList() {
         return platformUsageList;
     }
+
+    public Service getService() {return this.service;}
 
     @Override
     public String toString() {
