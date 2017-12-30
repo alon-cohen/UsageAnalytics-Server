@@ -9,6 +9,7 @@ import application.model.TimeUsage;
 import application.repositories.LastUpdates.LastUpdatesRepository;
 import application.repositories.ServiceDayUsage.ServiceDayUsageRepository;
 import application.repositories.UsersTimeline.UsersTimelineRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -16,6 +17,7 @@ import java.util.*;
 @Service
 public class ServicesService {
 
+    @Autowired
     ServiceDayUsageRepository serviceDayUsageRepository;
     LastUpdatesRepository lastUpdatesRepository;
 

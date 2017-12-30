@@ -270,16 +270,17 @@ public class DataReader {
             for (List<String> row:dataMatrix.subList(1,dataMatrix.size()))
             {
                 String colValueString = row.get((colNum));
-                String[] verticals = colValueString.split("|");
+                String[] verticals = colValueString.split("\\|");
                 for(String vertical:verticals)
                 {
-                    if(!verticalDayUsage.containsValue(vertical))
+                    if(!verticalDayUsage.containsKey(vertical))
                     {
                         verticalDayUsage.put(vertical, 1);
                     }
                     else
                     {
-                        verticalDayUsage.put(vertical, verticalDayUsage.get(vertical)+1);
+                        int newValue = verticalDayUsage.get(vertical)+1;
+                        verticalDayUsage.put(vertical, newValue);
                     }
                 }
             }

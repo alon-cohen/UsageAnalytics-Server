@@ -29,19 +29,18 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
+    @Autowired
+    DataReader dr;
 
     @Autowired
     PlatformDayUsageRepository repository;
-
-    @Autowired
-    DataReader dr;
 
     @Bean
     CommandLineRunner init() {
 
         return args -> {
 
-        String path = "C:/Users/capon/Desktop/IOT/csv's/DX_UsageDailyRprt_2017-11-14.csv";
+        String path = "C:/Iot Files/DX_UsageDailyRprt_2017-11-14.csv";
         File file = new File(path);
 
         PlatformDayUsageRepository platformDayUsageRepository;
