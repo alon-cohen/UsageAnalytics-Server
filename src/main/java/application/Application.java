@@ -17,7 +17,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -33,41 +36,59 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-//    @Autowired
-//    PlatformDayUsageRepository repository;
-//
-//    @Bean
-//    CommandLineRunner init() {
-//
-//        return args -> {
-//
-//            // save a couple of PlatformUsage
-//            PlatformUsage pu1 = new PlatformUsage(Platform.ALEXA, 500);
-//            PlatformUsage pu2 = new PlatformUsage(Platform.MOBILE, 10);
-//            PlatformUsage pu3 = new PlatformUsage(Platform.IFTTT, 22);
-//            PlatformUsage pu4 = new PlatformUsage(Platform.WEB, 231434);
-//            List<PlatformUsage> platformUsageList = new ArrayList<>();
-//            platformUsageList.add(pu1);
-//            platformUsageList.add(pu2);
-//            platformUsageList.add(pu3);
-//            platformUsageList.add(pu4);
-//
-//            Date today = new Date();
-//            PlatformsDayUsage platformsDayUsage = new PlatformsDayUsage(today, platformUsageList);
-//            repository.save(platformsDayUsage);
-//
-//            System.out.println("-------------------------------");
-//            List<PlatformsDayUsage> all = repository.findAll();
-//            for (PlatformsDayUsage pdu : all) {
-//                System.out.println(pdu);
-//            }
-//            System.out.println();
-//
-//            PlatformsDayUsage oneByDate = repository.findOneByDay(today);
-//            System.out.println(oneByDate);
-//
-//        };
-//
-//    }
+    @Autowired
+    PlatformDayUsageRepository repository;
+
+    @Bean
+    CommandLineRunner init() {
+
+        return args -> {
+
+            // save a couple of PlatformUsage
+            PlatformUsage pu1 = new PlatformUsage(Platform.ALEXA, 500);
+            PlatformUsage pu2 = new PlatformUsage(Platform.MOBILE, 10);
+            PlatformUsage pu3 = new PlatformUsage(Platform.IFTTT, 22);
+            PlatformUsage pu4 = new PlatformUsage(Platform.WEB, 231434);
+            List<PlatformUsage> platformUsageList = new ArrayList<>();
+            platformUsageList.add(pu1);
+            platformUsageList.add(pu2);
+            platformUsageList.add(pu3);
+            platformUsageList.add(pu4);
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+            Date today = df.parse("2015-11-11");
+            Date today2 = df.parse("2015-11-12");
+            Date today3 = df.parse("2015-11-05");
+
+            PlatformsDayUsage platformsDayUsage = new PlatformsDayUsage(today, platformUsageList, Service.ALL);
+            PlatformsDayUsage platformsDayUsage2 = new PlatformsDayUsage(today2, platformUsageList, Service.HA);
+            PlatformsDayUsage platformsDayUsage3 = new PlatformsDayUsage(today3, platformUsageList, Service.HA);
+
+            //pattern = "yyyy-MM-dd"
+
+            repository.save(platformsDayUsage);
+            repository.save(platformsDayUsage2);
+            repository.save(platformsDayUsage3);
+
+
+            System.out.println("-------------------------------");
+            List<PlatformsDayUsage> all = repository.findAll();
+            for (PlatformsDayUsage pdu : all) {
+                System.out.println(pdu);
+            }
+            System.out.println();
+
+            System.out.println("-------------------------------");
+
+            Collection<PlatformsDayUsage> res= repository.findByDateBetween(today,today2);
+           System.out.println(res.size());
+
+            //PlatformsDayUsage oneByDate = repository.findOneByDate(today);
+            //System.out.println(oneByDate);
+
+        };
+
+    }
 
 }

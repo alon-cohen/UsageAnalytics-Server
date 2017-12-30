@@ -2,6 +2,7 @@ package application.services;
 
 import application.enums.Platform;
 import application.model.*;
+import application.repositories.user.PlatformDayUsage.PlatformDayUsageRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -81,16 +82,16 @@ public class DataReader {
 
                 switch (service) {
                     case HA:
-                        platformsDayUsageHA = new PlatformsDayUsage(date, platformUsageList);
+                        platformsDayUsageHA = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.HA);
                         break;
                     case SECURITY:
-                        platformsDayUsageSecurity = new PlatformsDayUsage(date, platformUsageList);
+                        platformsDayUsageSecurity = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.SECURITY);
                         break;
                     case VIDEO_SESSION:
-                        platformsDayUsageVideoSession = new PlatformsDayUsage(date, platformUsageList);
+                        platformsDayUsageVideoSession = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.VIDEO_SESSION);
                         break;
                     case VIDEO_RECORD:
-                        platformsDayUsageVideoRecord = new PlatformsDayUsage(date, platformUsageList);
+                        platformsDayUsageVideoRecord = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.VIDEO_RECORD);
                         break;
                 }
             }
@@ -107,7 +108,7 @@ public class DataReader {
         {
             allPlatformUsageList.add(new PlatformUsage((Platform.values()[i]), allData[i]));
         }
-        platformsDayUsageAll = new PlatformsDayUsage(date, allPlatformUsageList);
+        platformsDayUsageAll = new PlatformsDayUsage(date, allPlatformUsageList, application.enums.Service.ALL);
 
         server.addToPlatformUsageTimelineLists(platformsDayUsageHA, platformsDayUsageVideoSession, platformsDayUsageVideoRecord, platformsDayUsageSecurity, platformsDayUsageAll);
 

@@ -9,15 +9,16 @@ import java.util.List;
 @Document
 public class PlatformsDayUsage {
     Date date;
+    Service theService;
     List<PlatformUsage> platformUsageList;
-    Service service;
 
     public PlatformsDayUsage() {
     }
 
-    public PlatformsDayUsage(Date date, List<PlatformUsage> PlatformUsageList)
+    public PlatformsDayUsage(Date date, List<PlatformUsage> PlatformUsageList, Service service)
     {
         this.date = date;
+        this.theService=service;
         this.platformUsageList=PlatformUsageList;
     }
 
@@ -28,7 +29,7 @@ public class PlatformsDayUsage {
     }
 
     public void setService (Service service) {
-        this.service=service;
+        this.theService=service;
     }
 
     public Date getDate() {
@@ -39,12 +40,13 @@ public class PlatformsDayUsage {
         return platformUsageList;
     }
 
-    public Service getService() {return this.service;}
+    public Service getService() {return this.theService;}
 
     @Override
     public String toString() {
         return "PlatformsDayUsage{" +
                 "date=" + date +
+                ", service=" + theService+
                 ", platformUsageList=" + platformUsageList +
                 '}';
     }
