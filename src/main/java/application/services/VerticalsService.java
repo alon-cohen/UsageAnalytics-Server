@@ -37,6 +37,7 @@ public  class VerticalsService {
         VerticalDayUsage dayReader = verticalDayUsageRepository.findOneByDate(date);
         VerticalUsage firstTopVertical, secondTopVertical, thirdTopVertical;
 
+
         firstTopVertical =  new VerticalUsage("temp", -1);
         secondTopVertical = new VerticalUsage("temp", -1);
         thirdTopVertical = new VerticalUsage("temp", -1);
