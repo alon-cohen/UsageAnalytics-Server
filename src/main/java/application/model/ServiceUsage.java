@@ -11,9 +11,9 @@ import application.enums.Service;
 public class ServiceUsage {
 
     private Service service;
-    private long usageAmount;
+    private int usageAmount;
 
-    public ServiceUsage(Service service, long usageAmount)
+    public ServiceUsage(Service service, int usageAmount)
     {
         this.service=service;
         this.usageAmount=usageAmount;
@@ -21,7 +21,7 @@ public class ServiceUsage {
 
     public void setService (Service service) {this.service=service;}
     public Service getService () {return service;}
-    public void setUsageAmount (Long usageAmount) {this.usageAmount=usageAmount;}
-    public Long getUsageAmount () {return  usageAmount;}
+    public void setUsageAmount (int usageAmount) {this.usageAmount=usageAmount;}
+    public int getUsageAmount () {return  usageAmount;}
 
 }

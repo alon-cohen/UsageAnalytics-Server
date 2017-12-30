@@ -11,10 +11,7 @@ import application.repositories.ServiceDayUsage.ServiceDayUsageRepository;
 import application.repositories.UsersTimeline.UsersTimelineRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ServicesService {
@@ -39,6 +36,7 @@ public class ServicesService {
                 }
             }
         }
+        Collections.sort(res);
         return res;
     }
 
@@ -114,6 +112,4 @@ public class ServicesService {
         res.add(new ServiceUsage(thirdTopService.getService(),thirdTopService.getUsageAmount()));
         return res;
     }
-
-
 }
