@@ -36,12 +36,16 @@ public class PlatformsService {
                     {
                         case MOBILE:
                             countMobile+=platformUsage.getUsageAmount();
+                            break;
                         case ALEXA:
                             countAlexa+=platformUsage.getUsageAmount();
+                            break;
                         case WEB:
                             countWeb+=platformUsage.getUsageAmount();
+                            break;
                         case IFTTT:
                             countIFTTT+=platformUsage.getUsageAmount();
+                            break;
                     }
                 }
             }

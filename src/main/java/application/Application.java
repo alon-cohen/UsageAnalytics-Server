@@ -29,6 +29,7 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
+
     @Autowired
     DataReader dr;
 
@@ -40,11 +41,17 @@ public class Application {
 
         return args -> {
 
-        String path = "C:/Iot Files/DX_UsageDailyRprt_2017-11-14.csv";
-        File file = new File(path);
+            String path1 = "C:/Users/capon/Desktop/IOT/csv's/DX_UsageDailyRprt_2017-11-14.csv";
+            File file1 = new File(path1);
+            String path2 = "C:/Users/capon/Desktop/IOT/csv's/DX_UsageDailyRprt_2017-11-16.csv";
+            File file2 = new File(path2);
+            String path3 = "C:/Users/capon/Desktop/IOT/csv's/DX_UsageDailyRprt_2017-11-15.csv";
+            File file3 = new File(path3);
 
-        PlatformDayUsageRepository platformDayUsageRepository;
-        dr.insertDataFile(file);
+            PlatformDayUsageRepository platformDayUsageRepository;
+            dr.insertDataFile(file1);
+            dr.insertDataFile(file2);
+            dr.insertDataFile(file3);
 
             // save a couple of PlatformUsage
 //            PlatformUsage pu1 = new PlatformUsage(Platform.ALEXA, 500);

@@ -4,6 +4,7 @@ import application.enums.Service;
 import application.model.PlatformUsage;
 import application.model.TimeUsage;
 import application.model.VerticalUsage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

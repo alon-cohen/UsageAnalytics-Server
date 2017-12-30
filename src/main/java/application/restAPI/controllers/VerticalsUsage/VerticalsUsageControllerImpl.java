@@ -2,6 +2,7 @@ package application.restAPI.controllers.VerticalsUsage;
 
 import application.model.VerticalUsage;
 import application.services.VerticalsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,10 +18,12 @@ import java.util.List;
 @RestController
 public class VerticalsUsageControllerImpl implements VerticalsUsageControllerAPI {
 
+    @Autowired
+    VerticalsService verticalsService;
+
     //GET
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<VerticalUsage>> getVerticalsUsage(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
-        VerticalsService verticalsService= new VerticalsService();
         List<VerticalUsage> verticalUsageList = verticalsService.getVerticalsUsage(date);
         return new ResponseEntity<List<VerticalUsage>>(verticalUsageList, HttpStatus.OK);
     }

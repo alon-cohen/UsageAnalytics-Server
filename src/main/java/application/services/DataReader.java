@@ -52,6 +52,7 @@ public class DataReader {
 
     public void insertDataFile (File file)
     {
+        dataMatrix = new ArrayList<List<String>>();
         String data;
         String fileName;
         String dateStr;

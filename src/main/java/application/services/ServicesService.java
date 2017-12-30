@@ -56,15 +56,19 @@ public class ServicesService {
                 {
                     case HA:
                         countHA+=serviceUsage.getUsageAmount();
+                        break;
                     case SECURITY:
                         countSecurity+=serviceUsage.getUsageAmount();
+                        break;
                     case VIDEO_RECORD:
                         countVideoRecord+=serviceUsage.getUsageAmount();
+                        break;
                     case VIDEO_SESSION:
                         countVideoSession+=serviceUsage.getUsageAmount();
+                        break;
                     case ALL:
                         countAll+=serviceUsage.getUsageAmount();
-
+                        break;
                 }
             }
         }
