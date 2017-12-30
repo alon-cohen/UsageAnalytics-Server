@@ -1,5 +1,16 @@
 package application.services;
 
+import application.repositories.PlatformDayUsage.PlatformDayUsageRepository;
+import application.services.DataReader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import java.io.File;
+
+import application.Application;
 import application.enums.Platform;
 import application.model.*;
 import application.repositories.LastUpdates.LastUpdatesRepository;
@@ -8,6 +19,8 @@ import application.repositories.ServiceDayUsage.ServiceDayUsageRepository;
 import application.repositories.UsersTimeline.UsersTimelineRepository;
 import application.repositories.VerticalDayUsage.VerticalDayUsageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -24,6 +37,7 @@ public class DataReader {
     //private TestServer server = TestServer.getInstance();
     static List<List<String>>dataMatrix = new ArrayList<List<String>>();
     static Date date;
+
 
     @Autowired
     PlatformDayUsageRepository platformDayUsageRepository;
@@ -220,9 +234,12 @@ public class DataReader {
     private void insertNewUpdateDate()
     {
         List<LastUpdates> previousLastUpdatesList= lastUpdatesRepository.findAll();
-        LastUpdates previousLastUpdates=previousLastUpdatesList.get(0);
         LastUpdates newLastUpdates=new LastUpdates();
-        newLastUpdates.setPreviousDate(previousLastUpdates.getCurrDate());
+        if (!previousLastUpdatesList.isEmpty())
+        {
+            LastUpdates previousLastUpdates=previousLastUpdatesList.get(0);
+            newLastUpdates.setPreviousDate(previousLastUpdates.getCurrDate());
+        }
         newLastUpdates.setCurrDate(date);
         lastUpdatesRepository.deleteAll();
         lastUpdatesRepository.save(newLastUpdates);
