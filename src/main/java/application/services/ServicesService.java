@@ -81,6 +81,7 @@ public class ServicesService {
         return res;
     }
 
+
     public List<ServiceUsage> getTopThreeServices ()
     {
         List<LastUpdates> lastUpdate = lastUpdatesRepository.findAll();
