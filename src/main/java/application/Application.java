@@ -24,8 +24,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class Application {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 //        String path = "C:/Iot Files/DX_UsageDailyRprt_2017-11-14.csv";
 //        File file = new File(path);
 //        DataReader dr = new DataReader();
@@ -79,8 +78,8 @@ public class Application {
 
             System.out.println("-------------------------------");
 
-            Collection<PlatformsDayUsage> res= repository.findByDateBetween(today,today2);
-           System.out.println(res.size());
+            Collection<PlatformsDayUsage> res = repository.findByDateBetween(today, today2);
+            System.out.println(res.size());
 
             //PlatformsDayUsage oneByDate = repository.findOneByDate(today);
             //System.out.println(oneByDate);

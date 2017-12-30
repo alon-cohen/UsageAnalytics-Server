@@ -2,6 +2,12 @@ package application.services;
 
 import application.enums.Platform;
 import application.model.*;
+import application.repositories.LastUpdates.LastUpdatesRepository;
+import application.repositories.PlatformDayUsage.PlatformDayUsageRepository;
+import application.repositories.ServiceDayUsage.ServiceDayUsageRepository;
+import application.repositories.UsersTimeline.UsersTimelineRepository;
+import application.repositories.VerticalDayUsage.VerticalDayUsageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -15,10 +21,20 @@ import java.util.*;
 public class DataReader {
     static final int k_StartDateInFileName= "DX_UsageDailyRprt_".length();
     static final int k_EndDateInFileName = "DX_UsageDailyRprt_2017-11-16".length();
-    private TestServer server = TestServer.getInstance();
+    //private TestServer server = TestServer.getInstance();
     static List<List<String>>dataMatrix = new ArrayList<List<String>>();
     static Date date;
 
+    @Autowired
+    PlatformDayUsageRepository platformDayUsageRepository;
+    @Autowired
+    LastUpdatesRepository lastUpdatesRepository;
+    @Autowired
+    ServiceDayUsageRepository serviceDayUsageRepository;
+    @Autowired
+    UsersTimelineRepository usersTimelineRepository;
+    @Autowired
+    VerticalDayUsageRepository verticalDayUsageRepository;
 
     public void insertDataFile (File file)
     {
@@ -45,6 +61,9 @@ public class DataReader {
 
             insertDailyPlatformUsage();
             insertAmountOfUsers();
+            insertDailyServiceUsage();
+            insertNewUpdateDate();
+            InsertVerticalDayUsage("OFFERS_LIST");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -58,7 +77,8 @@ public class DataReader {
     {
         int userCount=0;
         userCount=dataMatrix.size()-1;
-        server.addToUserTimeLineList(new TimeUsage(date, userCount));
+        usersTimelineRepository.save(new TimeUsage(date, userCount));
+        //server.addToUserTimeLineList(new TimeUsage(date, userCount));
     }
 
     private void insertDailyPlatformUsage()
@@ -109,7 +129,12 @@ public class DataReader {
         }
         platformsDayUsageAll = new PlatformsDayUsage(date, allPlatformUsageList, application.enums.Service.ALL);
 
-        server.addToPlatformUsageTimelineLists(platformsDayUsageHA, platformsDayUsageVideoSession, platformsDayUsageVideoRecord, platformsDayUsageSecurity, platformsDayUsageAll);
+        platformDayUsageRepository.save(platformsDayUsageHA);
+        platformDayUsageRepository.save(platformsDayUsageVideoSession);
+        platformDayUsageRepository.save(platformsDayUsageVideoRecord);
+        platformDayUsageRepository.save(platformsDayUsageSecurity);
+        platformDayUsageRepository.save(platformsDayUsageAll);
+        //server.addToPlatformUsageTimelineLists(platformsDayUsageHA, platformsDayUsageVideoSession, platformsDayUsageVideoRecord, platformsDayUsageSecurity, platformsDayUsageAll);
 
     }
 
@@ -160,8 +185,8 @@ public class DataReader {
         }
 
         serviceDayUsage= new ServiceDayUsage(date, serviceUsageList);
-
-        server.addToServiceUsageTimelineList(serviceDayUsage);
+        serviceDayUsageRepository.save(serviceDayUsage);
+        //server.addToServiceUsageTimelineList(serviceDayUsage);
     }
 
     private int countUsage(String platform)
@@ -192,12 +217,19 @@ public class DataReader {
         return count;
     }
 
-    private void updateNewItemDateInServer(Date date)
+    private void insertNewUpdateDate()
     {
-        server.updateLastUpdates(date);
+        List<LastUpdates> previousLastUpdatesList= lastUpdatesRepository.findAll();
+        LastUpdates previousLastUpdates=previousLastUpdatesList.get(0);
+        LastUpdates newLastUpdates=new LastUpdates();
+        newLastUpdates.setPreviousDate(previousLastUpdates.getCurrDate());
+        newLastUpdates.setCurrDate(date);
+        lastUpdatesRepository.deleteAll();
+        lastUpdatesRepository.save(newLastUpdates);
+        //server.updateLastUpdates(date);
     }
 
-    public void calcAndUpdateVerticalDayUsage(String verticlStringInFile)
+    public void InsertVerticalDayUsage(String verticlStringInFile)
     {
         List<String> headers = dataMatrix.get(0);
         Map<String, Integer> verticalDayUsage=new HashMap<String, Integer>();
@@ -235,7 +267,8 @@ public class DataReader {
                 }
             }
             List<VerticalUsage> verticalDayUsageList = getDayListUsageFromMap(verticalDayUsage);
-            server.addToVerticalDayUsageList(new VerticalDayUsage(date, verticalDayUsageList));
+            verticalDayUsageRepository.save(new VerticalDayUsage(date, verticalDayUsageList));
+            //server.addToVerticalDayUsageList(new VerticalDayUsage(date, verticalDayUsageList));
         }
     }
 
