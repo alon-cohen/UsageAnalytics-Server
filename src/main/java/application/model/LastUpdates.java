@@ -7,6 +7,8 @@ public class LastUpdates {
     private Date currDate;
     private Date previousDate;
 
+    public LastUpdates() {}
+
     public LastUpdates(Date currDate, long previousDate)
     {
         this.currDate=currDate;
