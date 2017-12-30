@@ -9,7 +9,7 @@ package application.model;
 
 import java.util.Date;
 
-public class TimeUsage {
+public class TimeUsage implements Comparable<TimeUsage> {
 
     private Date date;
     private int amount;
@@ -24,5 +24,10 @@ public class TimeUsage {
     public Date getDate () {return date;}
     public void setAmount (int amount) {this.amount=amount;}
     public int getAmount () {return  amount;}
+
+    @Override
+    public int compareTo(TimeUsage o) {
+        return getDate().compareTo(o.getDate());
+    }
 
 }

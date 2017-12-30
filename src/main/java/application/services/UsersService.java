@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,9 @@ public class UsersService {
     public List<TimeUsage> getUsersTimeline ()
     {
         List<TimeUsage> res = usersTimelineRepository.findAll();
+
+        Collections.sort(res);
+
         return res;
     }
 

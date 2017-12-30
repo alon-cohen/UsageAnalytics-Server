@@ -42,6 +42,7 @@ public class ServicesService {
         return res;
     }
 
+
     public List<ServiceUsage> getServiceUsage (Date startDate, Date endDate)
     {
         Collection<ServiceDayUsage> dataReader = serviceDayUsageRepository.findByDateBetween(startDate, endDate);
