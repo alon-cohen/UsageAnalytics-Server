@@ -87,7 +87,10 @@ public class ServicesService {
         Date date = lastUpdate.get(0).getCurrDate();
         ServiceDayUsage dataReader =  serviceDayUsageRepository.findOneByDate(date);
         ServiceUsage firstTopService, secondTopService, thirdTopService;
-        firstTopService = secondTopService = thirdTopService =new ServiceUsage(application.enums.Service.VIDEO_SESSION,-1);
+        firstTopService =new ServiceUsage(application.enums.Service.VIDEO_SESSION,-1);
+        secondTopService = new ServiceUsage(application.enums.Service.VIDEO_SESSION,-1);
+        thirdTopService =new ServiceUsage(application.enums.Service.VIDEO_SESSION,-1);
+
         for(ServiceUsage serviceUsage : dataReader.getserviceUsageList())
         {
             if(serviceUsage.getUsageAmount() > firstTopService.getUsageAmount())

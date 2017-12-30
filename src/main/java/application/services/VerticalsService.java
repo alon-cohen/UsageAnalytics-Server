@@ -17,10 +17,11 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
-public class VerticalsService {
+public  class VerticalsService {
 
     @Autowired
     VerticalDayUsageRepository verticalDayUsageRepository;
+    @Autowired
     LastUpdatesRepository lastUpdatesRepository;
 
     public List<VerticalUsage> getVerticalsUsage (Date date)
@@ -29,14 +30,16 @@ public class VerticalsService {
         return dataReader.getVerticalUsageList();
     }
 
-    public List<VerticalUsage> getTopThreeVerticals ()
+    public  List<VerticalUsage> getTopThreeVerticals ()
     {
         List<LastUpdates> lastUpdate = lastUpdatesRepository.findAll();
         Date date = lastUpdate.get(0).getCurrDate();
         VerticalDayUsage dayReader = verticalDayUsageRepository.findOneByDate(date);
         VerticalUsage firstTopVertical, secondTopVertical, thirdTopVertical;
 
-        firstTopVertical = secondTopVertical = thirdTopVertical = new VerticalUsage("temp", -1);
+        firstTopVertical =  new VerticalUsage("temp", -1);
+        secondTopVertical = new VerticalUsage("temp", -1);
+        thirdTopVertical = new VerticalUsage("temp", -1);
 
         for(VerticalUsage verticalUsage : dayReader.getVerticalUsageList())
         {
