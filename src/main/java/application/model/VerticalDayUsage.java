@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 public class VerticalDayUsage {
-    Date date;
-    List<VerticalUsage> verticalUsageList;
+    private Date date;
+    private List<VerticalUsage> verticalUsageList;
 
     public VerticalDayUsage(Date date, List<VerticalUsage> verticalUsageList)
     {
@@ -13,6 +13,8 @@ public class VerticalDayUsage {
         this.verticalUsageList = verticalUsageList;
     }
 
+    public Date getDate() { return date; }
+    public List<VerticalUsage> getVerticalUsageList() { return verticalUsageList; }
     public void setDate(Date date){ this.date=date; }
     public void setVerticalUsageList(List<VerticalUsage> verticalUsageList){this.verticalUsageList = verticalUsageList;}
     public void addVerticalUsageToList(VerticalUsage verticalUsage){
