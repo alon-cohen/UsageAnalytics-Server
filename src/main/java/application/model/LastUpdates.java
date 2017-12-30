@@ -19,4 +19,5 @@ public class LastUpdates {
     public Date getCurrDate () {return currDate;}
     public void setPreviousDate (Date amount) {this.previousDate=previousDate;}
     public Date getPreviousDate () {return  previousDate;}
+
 }
