@@ -9,7 +9,6 @@ import java.util.List;
 public class TestServer {
     private static TestServer ourInstance = new TestServer();
     private List<TimeUsage> usersTimeline = new ArrayList<TimeUsage>();
-
     private List<PlatformsDayUsage> platformUsageTimelineAll = new ArrayList<PlatformsDayUsage>();
     private List<PlatformsDayUsage> platformUsageTimelineHA = new ArrayList<PlatformsDayUsage>();
     private List<PlatformsDayUsage> platformUsageTimelineVideoSession = new ArrayList<PlatformsDayUsage>();

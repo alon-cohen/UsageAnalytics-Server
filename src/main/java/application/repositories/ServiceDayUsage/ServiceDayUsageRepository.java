@@ -1,6 +1,5 @@
-package application.repositories.user.ServiceDayUsage;
+package application.repositories.ServiceDayUsage;
 
-import application.model.PlatformsDayUsage;
 import application.model.ServiceDayUsage;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

@@ -1,11 +1,9 @@
-package application.repositories.user.PlatformDayUsage;
+package application.repositories.PlatformDayUsage;
 
 import application.model.PlatformsDayUsage;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 

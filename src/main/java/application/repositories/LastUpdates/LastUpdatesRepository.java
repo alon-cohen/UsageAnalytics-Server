@@ -1,4 +1,4 @@
-package application.repositories.user.LastUpdatesRepository;
+package application.repositories.LastUpdates;
 
 import application.model.LastUpdates;
 import org.springframework.data.mongodb.repository.MongoRepository;

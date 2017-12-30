@@ -8,15 +8,13 @@ import application.enums.Platform;
 import application.enums.Service;
 import application.model.PlatformUsage;
 import application.model.PlatformsDayUsage;
-import application.repositories.user.PlatformDayUsage.PlatformDayUsageRepository;
-import application.services.DataReader;
+import application.repositories.PlatformDayUsage.PlatformDayUsageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

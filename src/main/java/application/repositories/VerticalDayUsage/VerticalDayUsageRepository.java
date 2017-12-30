@@ -1,6 +1,5 @@
-package application.repositories.user.VerticalDayUsage;
+package application.repositories.VerticalDayUsage;
 
-import application.model.ServiceDayUsage;
 import application.model.VerticalDayUsage;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

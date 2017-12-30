@@ -4,9 +4,7 @@ package application.services;//package application.services;
 
 import application.enums.Platform;
 import application.model.PlatformUsage;
-import application.model.ServiceUsage;
-import application.model.TimeUsage;
-import application.repositories.user.PlatformDayUsage.PlatformDayUsageRepository;
+import application.repositories.PlatformDayUsage.PlatformDayUsageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
