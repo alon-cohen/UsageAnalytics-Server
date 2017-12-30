@@ -2,10 +2,6 @@
 //
 //import org.springframework.stereotype.Component;
 //
-///**
-// * Created by matan on 10/05/2016.
-// */
-//
 //@Component
 //public class UserRepositoryImpl implements UserRepositoryCustom {
 //

@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Matan Lachmish,
- * On 23/10/2016.
- */
+
 @RequestMapping("/test")
 public interface TesrControllerAPI {
 

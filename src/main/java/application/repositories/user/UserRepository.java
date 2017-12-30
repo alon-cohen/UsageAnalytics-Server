@@ -7,10 +7,6 @@
 //import java.util.Optional;
 //
 //
-///**
-// * Created by matan on 09/05/2016.
-// */
-//
 //@Repository
 //public interface UserRepository extends CrudRepository<User, String>, UserRepositoryCustom{
 //    Optional<User> findById(String id);

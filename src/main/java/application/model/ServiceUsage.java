@@ -1,10 +1,5 @@
 package application.model;
 
-//
-///**
-// * Created by matan on 09/05/2016.
-// */
-//
 
 import application.enums.Service;
 

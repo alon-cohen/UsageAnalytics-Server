@@ -1,9 +1,5 @@
 //package application.model;
 //
-///**
-// * Created by matan on 09/05/2016.
-// */
-//
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.authority.AuthorityUtils;

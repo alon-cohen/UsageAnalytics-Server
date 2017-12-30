@@ -19,6 +19,7 @@ public class ServicesService {
 
     @Autowired
     ServiceDayUsageRepository serviceDayUsageRepository;
+    @Autowired
     LastUpdatesRepository lastUpdatesRepository;
 
 

@@ -1,18 +1,12 @@
 package application;
 
-/**
- * Created by matan on 09/05/2016.
- */
 
 import application.enums.Platform;
 import application.enums.Service;
 import application.model.PlatformUsage;
 import application.model.PlatformsDayUsage;
-import application.model.VerticalDayUsage;
-import application.model.VerticalUsage;
 import application.repositories.PlatformDayUsage.PlatformDayUsageRepository;
 import application.services.DataReader;
-import application.services.VerticalsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -39,28 +33,22 @@ public class Application {
     @Autowired
     PlatformDayUsageRepository repository;
 
-    @Autowired
-    VerticalsService ser;
     @Bean
     CommandLineRunner init() {
 
         return args -> {
 
-            String path1 = "C:/Iot Files/DX_UsageDailyRprt_2017-11-14.csv";
+            String path1 = "C:/Users/capon/Desktop/IOT/csv's/DX_UsageDailyRprt_2017-11-14.csv";
             File file1 = new File(path1);
-            String path2 = "C:/Iot Files/DX_UsageDailyRprt_2017-11-16.csv";
+            String path2 = "C:/Users/capon/Desktop/IOT/csv's/DX_UsageDailyRprt_2017-11-16.csv";
             File file2 = new File(path2);
-            String path3 = "C:/Iot Files/DX_UsageDailyRprt_2017-11-15.csv";
+            String path3 = "C:/Users/capon/Desktop/IOT/csv's/DX_UsageDailyRprt_2017-11-15.csv";
             File file3 = new File(path3);
 
             PlatformDayUsageRepository platformDayUsageRepository;
             dr.insertDataFile(file1);
             dr.insertDataFile(file2);
             dr.insertDataFile(file3);
-
-
-
-            List<VerticalUsage> topThree =ser.getTopThreeVerticals();
 
             // save a couple of PlatformUsage
 //            PlatformUsage pu1 = new PlatformUsage(Platform.ALEXA, 500);

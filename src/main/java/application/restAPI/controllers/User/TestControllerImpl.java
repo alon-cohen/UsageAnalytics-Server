@@ -16,10 +16,6 @@ import java.util.Date;
 import java.util.List;
 
 
-/**
- * Created by matan on 10/05/2016.
- */
-
 @RestController
 public class TestControllerImpl implements TesrControllerAPI {
 
