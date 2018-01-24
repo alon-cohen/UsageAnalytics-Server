@@ -217,7 +217,8 @@ public class DataReader {
         int colNum=0;
         int count=0;
         for (String string : headers) {
-            if(!string.matches(platform)){
+            if(!string.matches(platform))
+            {
                 colNum++;
             }
             else
