@@ -6,11 +6,13 @@ import java.util.List;
 public class ServiceDayUsage {
     Date date;
     List<ServiceUsage> serviceUsageList;
+    private String vendor="";
 
-    public ServiceDayUsage(Date date, List<ServiceUsage> serviceUsageList)
+    public ServiceDayUsage(Date date, List<ServiceUsage> serviceUsageList, String vendor)
     {
         this.date = date;
         this.serviceUsageList=serviceUsageList;
+        this.vendor=vendor;
     }
 
     public void setDate(Date date){this.date=date;}
@@ -26,6 +28,9 @@ public class ServiceDayUsage {
     public List<ServiceUsage> getserviceUsageList() {
         return serviceUsageList;
     }
+
+    public void setVendor (String vendor) {this.vendor=vendor;}
+    public String getVendor () {return  vendor;}
 
 
 }

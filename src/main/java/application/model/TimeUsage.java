@@ -8,11 +8,13 @@ public class TimeUsage implements Comparable<TimeUsage> {
 
     private Date date;
     private int amount;
+    private String vendor="";
 
-    public TimeUsage(Date date, int amount)
+    public TimeUsage(Date date, int amount, String vendor)
     {
         this.date=date;
         this.amount=amount;
+        this.vendor=vendor;
     }
 
     public void setDate (Date date) {this.date=date;}
@@ -24,5 +26,8 @@ public class TimeUsage implements Comparable<TimeUsage> {
     public int compareTo(TimeUsage o) {
         return getDate().compareTo(o.getDate());
     }
+
+    public void setVendor (String vendor) {this.vendor=vendor;}
+    public String getVendor () {return  vendor;}
 
 }

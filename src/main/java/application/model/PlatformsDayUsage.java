@@ -11,15 +11,17 @@ public class PlatformsDayUsage {
     Date date;
     Service theService;
     List<PlatformUsage> platformUsageList;
+    private String vendor="";
 
     public PlatformsDayUsage() {
     }
 
-    public PlatformsDayUsage(Date date, List<PlatformUsage> PlatformUsageList, Service service)
+    public PlatformsDayUsage(Date date, List<PlatformUsage> PlatformUsageList, Service service, String vendor)
     {
         this.date = date;
         this.theService=service;
         this.platformUsageList=PlatformUsageList;
+        this.vendor=vendor;
     }
 
     public void setDate(Date date){this.date=date;}
@@ -50,4 +52,7 @@ public class PlatformsDayUsage {
                 ", platformUsageList=" + platformUsageList +
                 '}';
     }
+
+    public void setVendor (String vendor) {this.vendor=vendor;}
+    public String getVendor () {return  vendor;}
 }
