@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,8 +22,8 @@ public class NewUsersAmountControllerImpl implements NewUsersAmountControllerAPI
 
     //GET
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Integer> getNewUsersAmount(){
-        Integer amount = usersService.getAmountOfNewUsers();
+    public ResponseEntity<Integer> getNewUsersAmount( @RequestParam("vendor")String vendor){
+        Integer amount = usersService.getAmountOfNewUsers(vendor);
         return new ResponseEntity<Integer>(amount, HttpStatus.OK);
     }
 }

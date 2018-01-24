@@ -19,10 +19,10 @@ public class GeneralInfoService {
     @Autowired
     LastUpdatesRepository lastUpdatesRepository;
 
-    public Date getLastUpdate ()
+    //V
+    public Date getLastUpdate (String vendor)
     {
-        List<LastUpdates> lastUpdatesList= lastUpdatesRepository.findAll();
-        LastUpdates lastUpdates=lastUpdatesList.get(0);
+        LastUpdates lastUpdates=lastUpdatesRepository.findOneByVendor(vendor);
         Date lastUpdate= lastUpdates.getCurrDate();
         return lastUpdate;
     }

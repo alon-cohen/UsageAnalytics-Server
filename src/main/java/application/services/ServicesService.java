@@ -22,20 +22,20 @@ public class ServicesService {
     @Autowired
     LastUpdatesRepository lastUpdatesRepository;
 
-
-    public List<TimeUsage> getServiceTimelineUsage (Date startDate, Date endDate, application.enums.Service service)
+    //V
+    public List<TimeUsage> getServiceTimelineUsage (Date startDate, Date endDate, application.enums.Service service, String vendor)
     {
         Collection<ServiceDayUsage> dataReader = serviceDayUsageRepository.findByDateBetween(startDate, endDate);
         List<TimeUsage> res = new ArrayList<TimeUsage>();
         for (ServiceDayUsage serviceDayUsage : dataReader)
         {
-            Date date = serviceDayUsage.getDate();
-            List<ServiceUsage> serviceUsageList = serviceDayUsage.getserviceUsageList();
-            for(ServiceUsage serviceUsage : serviceUsageList)
-            {
-                if(serviceUsage.getService()==service)
-                {
-                    res.add(new TimeUsage(date, serviceUsage.getUsageAmount()));
+            if (vendor.equals(serviceDayUsage.getVendor())) {
+                Date date = serviceDayUsage.getDate();
+                List<ServiceUsage> serviceUsageList = serviceDayUsage.getserviceUsageList();
+                for (ServiceUsage serviceUsage : serviceUsageList) {
+                    if (serviceUsage.getService() == service) {
+                        res.add(new TimeUsage(date, serviceUsage.getUsageAmount(),vendor));
+                    }
                 }
             }
         }
@@ -44,32 +44,34 @@ public class ServicesService {
     }
 
 
-    public List<ServiceUsage> getServiceUsage (Date startDate, Date endDate)
+    //V
+    public List<ServiceUsage> getServiceUsage (Date startDate, Date endDate, String vendor)
     {
         Collection<ServiceDayUsage> dataReader = serviceDayUsageRepository.findByDateBetween(startDate, endDate);
         int countHA=0, countSecurity=0, countVideoRecord=0, countVideoSession=0, countAll=0;
 
         for (ServiceDayUsage serviceDayUsage : dataReader)
         {
-            for(ServiceUsage serviceUsage : serviceDayUsage.getserviceUsageList())
+            if (vendor.equals(serviceDayUsage.getVendor()))
             {
-                switch (serviceUsage.getService())
-                {
-                    case HA:
-                        countHA+=serviceUsage.getUsageAmount();
-                        break;
-                    case SECURITY:
-                        countSecurity+=serviceUsage.getUsageAmount();
-                        break;
-                    case VIDEO_RECORD:
-                        countVideoRecord+=serviceUsage.getUsageAmount();
-                        break;
-                    case VIDEO_SESSION:
-                        countVideoSession+=serviceUsage.getUsageAmount();
-                        break;
-                    case ALL:
-                        countAll+=serviceUsage.getUsageAmount();
-                        break;
+                for (ServiceUsage serviceUsage : serviceDayUsage.getserviceUsageList()) {
+                    switch (serviceUsage.getService()) {
+                        case HA:
+                            countHA += serviceUsage.getUsageAmount();
+                            break;
+                        case SECURITY:
+                            countSecurity += serviceUsage.getUsageAmount();
+                            break;
+                        case VIDEO_RECORD:
+                            countVideoRecord += serviceUsage.getUsageAmount();
+                            break;
+                        case VIDEO_SESSION:
+                            countVideoSession += serviceUsage.getUsageAmount();
+                            break;
+                        case ALL:
+                            countAll += serviceUsage.getUsageAmount();
+                            break;
+                    }
                 }
             }
         }
@@ -82,11 +84,12 @@ public class ServicesService {
         return res;
     }
 
-    public List<ServiceUsage> getTopThreeServices ()
+    //V
+    public List<ServiceUsage> getTopThreeServices (String vendor)
     {
-        List<LastUpdates> lastUpdate = lastUpdatesRepository.findAll();
-        Date date = lastUpdate.get(0).getCurrDate();
-        ServiceDayUsage dataReader =  serviceDayUsageRepository.findOneByDate(date);
+        LastUpdates lastUpdates=lastUpdatesRepository.findOneByVendor(vendor);
+        Date date = lastUpdates.getCurrDate();
+        ServiceDayUsage dataReader =  serviceDayUsageRepository.findOneByDateAndVendor(date, vendor);
         ServiceUsage firstTopService, secondTopService, thirdTopService;
         firstTopService =new ServiceUsage(application.enums.Service.VIDEO_SESSION,-1);
         secondTopService = new ServiceUsage(application.enums.Service.VIDEO_SESSION,-1);

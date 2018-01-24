@@ -15,4 +15,6 @@ public interface PlatformDayUsageRepository extends MongoRepository<PlatformsDay
     @Query(value = "{'date':{ $gte: ?0, $lte: ?1}}")
     public Collection<PlatformsDayUsage> findByDateBetween(Date from, Date to);
 
+    Long removeByDateAndVendor(Date date, String vendor);
+
 }

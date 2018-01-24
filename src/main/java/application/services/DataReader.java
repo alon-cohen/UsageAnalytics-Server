@@ -35,8 +35,9 @@ public class DataReader {
     static final int k_StartDateInFileName= "DX_UsageDailyRprt_".length();
     static final int k_EndDateInFileName = "DX_UsageDailyRprt_2017-11-16".length();
     //private TestServer server = TestServer.getInstance();
-    static List<List<String>>dataMatrix = new ArrayList<List<String>>();
-    static Date date;
+    List<List<String>>dataMatrix = new ArrayList<List<String>>();
+    Date date;
+    String vendor;
 
 
     @Autowired
@@ -61,6 +62,7 @@ public class DataReader {
 
             dateStr=fileName.substring(k_StartDateInFileName,k_EndDateInFileName);
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            vendor=fileName.substring(0,2);
             try {
                 date = format.parse(dateStr);
             } catch (ParseException e) {
@@ -74,6 +76,7 @@ public class DataReader {
                 dataMatrix.add(Arrays.asList(data.split(",")));
             }
 
+            removeOldDataWithThisDateAndVendor();
             insertDailyPlatformUsage();
             insertAmountOfUsers();
             insertDailyServiceUsage();
@@ -88,12 +91,18 @@ public class DataReader {
 
     }
 
+    private void removeOldDataWithThisDateAndVendor() {
+        platformDayUsageRepository.removeByDateAndVendor(date,vendor);
+        serviceDayUsageRepository.removeByDateAndVendor(date,vendor);
+        usersTimelineRepository.removeByDateAndVendor(date,vendor);
+        verticalDayUsageRepository.removeByDateAndVendor(date,vendor);
+    }
+
     private void insertAmountOfUsers()
     {
         int userCount=0;
         userCount=dataMatrix.size()-1;
-        usersTimelineRepository.save(new TimeUsage(date, userCount));
-        //server.addToUserTimeLineList(new TimeUsage(date, userCount));
+        usersTimelineRepository.save(new TimeUsage(date, userCount, vendor));
     }
 
     private void insertDailyPlatformUsage()
@@ -116,16 +125,16 @@ public class DataReader {
 
                 switch (service) {
                     case HA:
-                        platformsDayUsageHA = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.HA);
+                        platformsDayUsageHA = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.HA, vendor);
                         break;
                     case SECURITY:
-                        platformsDayUsageSecurity = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.SECURITY);
+                        platformsDayUsageSecurity = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.SECURITY, vendor);
                         break;
                     case VIDEO_SESSION:
-                        platformsDayUsageVideoSession = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.VIDEO_SESSION);
+                        platformsDayUsageVideoSession = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.VIDEO_SESSION, vendor);
                         break;
                     case VIDEO_RECORD:
-                        platformsDayUsageVideoRecord = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.VIDEO_RECORD);
+                        platformsDayUsageVideoRecord = new PlatformsDayUsage(date, platformUsageList, application.enums.Service.VIDEO_RECORD, vendor);
                         break;
                 }
             }
@@ -142,15 +151,13 @@ public class DataReader {
         {
             allPlatformUsageList.add(new PlatformUsage((Platform.values()[i]), allData[i]));
         }
-        platformsDayUsageAll = new PlatformsDayUsage(date, allPlatformUsageList, application.enums.Service.ALL);
+        platformsDayUsageAll = new PlatformsDayUsage(date, allPlatformUsageList, application.enums.Service.ALL, vendor);
 
         platformDayUsageRepository.save(platformsDayUsageHA);
         platformDayUsageRepository.save(platformsDayUsageVideoSession);
         platformDayUsageRepository.save(platformsDayUsageVideoRecord);
         platformDayUsageRepository.save(platformsDayUsageSecurity);
         platformDayUsageRepository.save(platformsDayUsageAll);
-        //server.addToPlatformUsageTimelineLists(platformsDayUsageHA, platformsDayUsageVideoSession, platformsDayUsageVideoRecord, platformsDayUsageSecurity, platformsDayUsageAll);
-
     }
 
     private void addPlatformUsageListDataToAllCount (int[] allData, List<PlatformUsage> platformUsageList)
@@ -199,9 +206,8 @@ public class DataReader {
             }
         }
 
-        serviceDayUsage= new ServiceDayUsage(date, serviceUsageList);
+        serviceDayUsage= new ServiceDayUsage(date, serviceUsageList, vendor);
         serviceDayUsageRepository.save(serviceDayUsage);
-        //server.addToServiceUsageTimelineList(serviceDayUsage);
     }
 
     private int countUsage(String platform)
@@ -232,19 +238,19 @@ public class DataReader {
         return count;
     }
 
+
     private void insertNewUpdateDate()
     {
-        List<LastUpdates> previousLastUpdatesList= lastUpdatesRepository.findAll();
+        LastUpdates previousLastUpdates= lastUpdatesRepository.findOneByVendor(vendor);
         LastUpdates newLastUpdates=new LastUpdates();
-        if (!previousLastUpdatesList.isEmpty())
+        if (!(previousLastUpdates==null))
         {
-            LastUpdates previousLastUpdates=previousLastUpdatesList.get(0);
             newLastUpdates.setPreviousDate(previousLastUpdates.getCurrDate());
         }
         newLastUpdates.setCurrDate(date);
-        lastUpdatesRepository.deleteAll();
+        newLastUpdates.setVendor(vendor);
+        lastUpdatesRepository.removeByVendor(vendor);
         lastUpdatesRepository.save(newLastUpdates);
-        //server.updateLastUpdates(date);
     }
 
     public void InsertVerticalDayUsage(String verticlStringInFile)
@@ -286,8 +292,7 @@ public class DataReader {
                 }
             }
             List<VerticalUsage> verticalDayUsageList = getDayListUsageFromMap(verticalDayUsage);
-            verticalDayUsageRepository.save(new VerticalDayUsage(date, verticalDayUsageList));
-            //server.addToVerticalDayUsageList(new VerticalDayUsage(date, verticalDayUsageList));
+            verticalDayUsageRepository.save(new VerticalDayUsage(date, verticalDayUsageList, vendor));
         }
     }
 
@@ -301,70 +306,3 @@ public class DataReader {
         return verticalDayUsageList;
     }
 }
-
-
-        /*
-        HAWeb+=countPlatformUsage("HA_WEB");
-        PlatformUsage HAWebUsage=new PlatformUsage(Platform.WEB,HAWeb);
-        HAMobile += countPlatformUsage("HA_MOBILE");
-        PlatformUsage HAMobileUsage=new PlatformUsage(Platform.MOBILE,HAMobile);
-        HAAlexa += countPlatformUsage("HA_ALEXA");
-        PlatformUsage HAAlexaUsage=new PlatformUsage(Platform.ALEXA,HAAlexa);
-        HAIfttt +=countPlatformUsage("HA_IFTTT");
-        PlatformUsage HAIftttUsage=new PlatformUsage(Platform.IFTTT,HAIfttt);
-        List<PlatformUsage> HAList = new ArrayList<PlatformUsage>();
-        HAList.add(HAWebUsage);
-        HAList.add(HAMobileUsage);
-        HAList.add(HAAlexaUsage);
-        HAList.add(HAIftttUsage);
-        platformsDayUsageHA = new PlatformsDayUsage(date, HAList);
-
-        Security_Web+=countPlatformUsage("SECURITY_WEB");
-        PlatformUsage SecurityWebUsage=new PlatformUsage(Platform.WEB,Security_Web);
-        Security_Mobile+=countPlatformUsage("SECURITY_MOBILE");
-        PlatformUsage SecurityMobileUsage=new PlatformUsage(Platform.MOBILE,Security_Mobile);
-        Security_Alexa+=countPlatformUsage("SECURITY_ALEXA");
-        PlatformUsage SecurityAlexaUsage=new PlatformUsage(Platform.ALEXA,Security_Alexa);
-        Security_Ifttt+=countPlatformUsage("SECURITY_IFTTT");
-        PlatformUsage SecurityIftttUsage=new PlatformUsage(Platform.IFTTT,Security_Ifttt);
-        List<PlatformUsage> SecurityList = new ArrayList<PlatformUsage>();
-        SecurityList.add(SecurityWebUsage);
-        SecurityList.add(SecurityMobileUsage);
-        SecurityList.add(SecurityAlexaUsage);
-        SecurityList.add(SecurityIftttUsage);
-        platformsDayUsageSecurity = new PlatformsDayUsage(date, SecurityList);
-
-        Video_Session_Web+=countPlatformUsage("VIDEO_SESSION_WEB");
-        PlatformUsage VideoSessionWebUsage=new PlatformUsage(Platform.WEB,Video_Session_Web);
-        Video_Session_Mobile+=countPlatformUsage("VIDEO_SESSION_MOBILE");
-        PlatformUsage VideoSessionMobileUsage=new PlatformUsage(Platform.MOBILE,Video_Session_Mobile);
-        Video_Session_Alexa+=countPlatformUsage("VIDEO_SESSION_ALEXA");
-        PlatformUsage VideoSessionAlexaUsage=new PlatformUsage(Platform.ALEXA,Video_Session_Alexa);
-        Video_Session_Ifttt+=countPlatformUsage("VIDEO_SESSION_IFTTT");
-        PlatformUsage VideoSessionIftttUsage=new PlatformUsage(Platform.IFTTT,Video_Session_Ifttt);
-        List<PlatformUsage> videoSessionList = new ArrayList<PlatformUsage>();
-        videoSessionList.add(VideoSessionWebUsage);
-        videoSessionList.add(VideoSessionMobileUsage);
-        videoSessionList.add(VideoSessionAlexaUsage);
-        videoSessionList.add(VideoSessionIftttUsage);
-        platformsDayUsageVideoSession = new PlatformsDayUsage(date, videoSessionList);
-
-        Video_Record_Web+=countPlatformUsage("VIDEO_RECORD_WEB");
-        PlatformUsage VideoRecordWebUsage=new PlatformUsage(Platform.WEB,Video_Record_Web);
-        Video_Record_Mobile+=countPlatformUsage("VIDEO_RECORD_MOBILE");
-        PlatformUsage VideoRecordMobileUsage=new PlatformUsage(Platform.MOBILE,Video_Record_Mobile);
-        Video_Record_Alexa+=countPlatformUsage("VIDEO_RECORD_ALEXA");
-        PlatformUsage VideoRecordAlexaUsage=new PlatformUsage(Platform.ALEXA,Video_Record_Alexa);
-        Video_Record_Ifttt+=countPlatformUsage("VIDEO_RECORD_IFTTT");
-        PlatformUsage VideoRecordIftttUsage=new PlatformUsage(Platform.IFTTT,Video_Record_Ifttt);
-        List<PlatformUsage> videoRecordList = new ArrayList<PlatformUsage>();
-        videoRecordList.add(VideoRecordWebUsage);
-        videoRecordList.add(VideoRecordMobileUsage);
-        videoRecordList.add(VideoRecordAlexaUsage);
-        videoRecordList.add(VideoRecordIftttUsage);
-        platformsDayUsageVideoRecord = new PlatformsDayUsage(date, videoRecordList);
-        */
-
-
-
-

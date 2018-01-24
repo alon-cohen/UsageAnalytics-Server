@@ -18,5 +18,5 @@ import java.util.List;
 public interface TopThreeVerticalsControllerAPI {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<VerticalUsage>> getTopThreeVerticals();
+    ResponseEntity<List<VerticalUsage>> getTopThreeVerticals(@RequestParam("vendor")String vendor);
 }

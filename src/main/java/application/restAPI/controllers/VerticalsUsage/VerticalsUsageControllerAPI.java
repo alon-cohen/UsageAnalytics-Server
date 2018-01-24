@@ -20,6 +20,6 @@ import java.util.List;
 public interface VerticalsUsageControllerAPI {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<VerticalUsage>> getVerticalsUsage(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date);
+    ResponseEntity<List<VerticalUsage>> getVerticalsUsage(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date, @RequestParam("vendor")String vendor);
 }
 

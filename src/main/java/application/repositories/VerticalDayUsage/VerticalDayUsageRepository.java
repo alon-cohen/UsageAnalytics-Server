@@ -12,7 +12,11 @@ public interface VerticalDayUsageRepository extends MongoRepository<VerticalDayU
 //  @Query("{ date : { $gte : { $date : 2015-05-16T07:55:23.257Z}},  $lte : { $date : 2015-05-16T07:55:23.257Z}}}")
     public VerticalDayUsage findOneByDate(Date date);
 
+    public VerticalDayUsage findOneByDateAndVendor(Date date, String vendor);
+
     @Query(value = "{'date':{ $gte: ?0, $lte: ?1}}")
     public Collection<VerticalDayUsage> findByDateBetween(Date from, Date to);
+
+    Long removeByDateAndVendor(Date date, String vendor);
 
 }

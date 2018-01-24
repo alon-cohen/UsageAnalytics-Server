@@ -7,5 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Date;
 
 public interface LastUpdatesRepository extends MongoRepository<LastUpdates, String> {
-    public PlatformsDayUsage findOneByVendor(String vendor);
+    public LastUpdates findOneByVendor(String vendor);
+
+    Long removeByVendor(String vendor);
 }

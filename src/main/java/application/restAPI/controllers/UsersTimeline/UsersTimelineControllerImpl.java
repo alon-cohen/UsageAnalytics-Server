@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class UsersTimelineControllerImpl implements UsersTimelineControllerAPI {
 
     //GET
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TimeUsage>> getUsersTimeline(){
-        List<TimeUsage> usersTimeline = usersService.getUsersTimeline();
+    public ResponseEntity<List<TimeUsage>> getUsersTimeline(@RequestParam("vendor")String vendor){
+        List<TimeUsage> usersTimeline = usersService.getUsersTimeline(vendor);
         return new ResponseEntity<List<TimeUsage>>(usersTimeline, HttpStatus.OK);
     }
 }

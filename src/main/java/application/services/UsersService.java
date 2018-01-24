@@ -10,10 +10,7 @@ import application.repositories.UsersTimeline.UsersTimelineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UsersService {
@@ -23,31 +20,32 @@ public class UsersService {
     @Autowired
     LastUpdatesRepository lastUpdatesRepository;
 
-    public List<TimeUsage> getUsersTimeline ()
+    //V
+    public List<TimeUsage> getUsersTimeline (String vendor)
     {
-        List<TimeUsage> res = usersTimelineRepository.findAll();
-
+        Collection<TimeUsage> resCollection = usersTimelineRepository.findByVendor(vendor);
+        List<TimeUsage> res = new ArrayList(resCollection);
         Collections.sort(res);
 
         return res;
     }
 
-    public int getAmountOfUsers()
+    //V
+    public int getAmountOfUsers(String vendor)
     {
-        List<LastUpdates> lastUpdatesList= lastUpdatesRepository.findAll();
-        LastUpdates lastUpdates=lastUpdatesList.get(0);
+        LastUpdates lastUpdates=lastUpdatesRepository.findOneByVendor(vendor);
         Date lastUpdate= lastUpdates.getCurrDate();
         return (usersTimelineRepository.findOneByDate(lastUpdate)).getAmount();
     }
 
-    public int getAmountOfNewUsers()
+    //V
+    public int getAmountOfNewUsers(String vendor)
     {
-        List<LastUpdates> lastUpdatesList= lastUpdatesRepository.findAll();
-        LastUpdates lastUpdates=lastUpdatesList.get(0);
+        LastUpdates lastUpdates=lastUpdatesRepository.findOneByVendor(vendor);
         Date lastUpdate= lastUpdates.getCurrDate();
         Date previousUpdate=lastUpdates.getPreviousDate();
-        int newAmount= (usersTimelineRepository.findOneByDate(lastUpdate)).getAmount();
-        int previousAmount= (usersTimelineRepository.findOneByDate(previousUpdate)).getAmount();
+        int newAmount= (usersTimelineRepository.findOneByDateAndVendor(lastUpdate, vendor)).getAmount();
+        int previousAmount= (usersTimelineRepository.findOneByDateAndVendor(previousUpdate, vendor)).getAmount();
         int res=newAmount-previousAmount;
 
         if (res<0)

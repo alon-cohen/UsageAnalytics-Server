@@ -25,9 +25,9 @@ public class ServiceUsageTimelineControllerImpl implements ServiceUsageTimelineC
 
     //GET
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TimeUsage>> getServiceUsageTimeline(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, @RequestParam("service")Service service)
+    public ResponseEntity<List<TimeUsage>> getServiceUsageTimeline(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, @RequestParam("service")Service service, @RequestParam("vendor")String vendor)
     {
-        List<TimeUsage> servicesServiceList = servicesService.getServiceTimelineUsage(startDate, endDate, service);
+        List<TimeUsage> servicesServiceList = servicesService.getServiceTimelineUsage(startDate, endDate, service, vendor);
         return new ResponseEntity<List<TimeUsage>>(servicesServiceList, HttpStatus.OK);
     }
 }

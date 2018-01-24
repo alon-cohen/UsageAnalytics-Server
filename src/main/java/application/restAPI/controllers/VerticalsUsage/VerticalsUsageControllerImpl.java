@@ -23,8 +23,8 @@ public class VerticalsUsageControllerImpl implements VerticalsUsageControllerAPI
 
     //GET
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<VerticalUsage>> getVerticalsUsage(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
-        List<VerticalUsage> verticalUsageList = verticalsService.getVerticalsUsage(date);
+    public ResponseEntity<List<VerticalUsage>> getVerticalsUsage(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date, @RequestParam("vendor")String vendor){
+        List<VerticalUsage> verticalUsageList = verticalsService.getVerticalsUsage(date, vendor);
         return new ResponseEntity<List<VerticalUsage>>(verticalUsageList, HttpStatus.OK);
     }
 }

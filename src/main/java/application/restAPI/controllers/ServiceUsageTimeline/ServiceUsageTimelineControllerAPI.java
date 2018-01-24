@@ -18,5 +18,5 @@ import java.util.List;
 public interface ServiceUsageTimelineControllerAPI {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<TimeUsage>> getServiceUsageTimeline(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, @RequestParam("service") Service service);
+    ResponseEntity<List<TimeUsage>> getServiceUsageTimeline(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, @RequestParam("service") Service service, @RequestParam("vendor")String vendor);
 }

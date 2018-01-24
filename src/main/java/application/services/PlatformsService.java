@@ -20,7 +20,8 @@ public class PlatformsService {
     @Autowired
     PlatformDayUsageRepository repository;
 
-    public List<PlatformUsage> getPlatformComparisonData (Date startDate, Date endDate, application.enums.Service service)
+    //V
+    public List<PlatformUsage> getPlatformComparisonData (Date startDate, Date endDate, application.enums.Service service, String vendor)
     {
         Collection<PlatformsDayUsage> dataReader = repository.findByDateBetween(startDate, endDate);
         List<PlatformUsage> res = new ArrayList<PlatformUsage>();
@@ -28,7 +29,7 @@ public class PlatformsService {
 
         for (PlatformsDayUsage platformsDayUsage : dataReader)
         {
-            if (service==platformsDayUsage.getService())
+            if (service==platformsDayUsage.getService() && vendor.equals(platformsDayUsage.getVendor()))
             {
                 for (PlatformUsage platformUsage : platformsDayUsage.getPlatformUsageList())
                 {

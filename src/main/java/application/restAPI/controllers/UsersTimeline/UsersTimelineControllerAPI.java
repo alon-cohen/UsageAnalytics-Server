@@ -18,5 +18,5 @@ import java.util.List;
 public interface UsersTimelineControllerAPI {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<TimeUsage>> getUsersTimeline();
+    ResponseEntity<List<TimeUsage>> getUsersTimeline(@RequestParam("vendor")String vendor);
 }

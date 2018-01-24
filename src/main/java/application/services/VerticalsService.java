@@ -24,17 +24,19 @@ public  class VerticalsService {
     @Autowired
     LastUpdatesRepository lastUpdatesRepository;
 
-    public List<VerticalUsage> getVerticalsUsage (Date date)
+    //V
+    public List<VerticalUsage> getVerticalsUsage (Date date, String vendor)
     {
-        VerticalDayUsage dataReader = verticalDayUsageRepository.findOneByDate(date);
+        VerticalDayUsage dataReader = verticalDayUsageRepository.findOneByDateAndVendor(date, vendor);
         return dataReader.getVerticalUsageList();
     }
 
-    public  List<VerticalUsage> getTopThreeVerticals ()
+    //V
+    public  List<VerticalUsage> getTopThreeVerticals (String vendor)
     {
-        List<LastUpdates> lastUpdate = lastUpdatesRepository.findAll();
-        Date date = lastUpdate.get(0).getCurrDate();
-        VerticalDayUsage dayReader = verticalDayUsageRepository.findOneByDate(date);
+        LastUpdates lastUpdates=lastUpdatesRepository.findOneByVendor(vendor);
+        Date date = lastUpdates.getCurrDate();
+        VerticalDayUsage dayReader = verticalDayUsageRepository.findOneByDateAndVendor(date,vendor);
         VerticalUsage firstTopVertical, secondTopVertical, thirdTopVertical;
 
 

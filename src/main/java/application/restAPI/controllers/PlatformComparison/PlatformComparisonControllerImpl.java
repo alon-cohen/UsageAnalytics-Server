@@ -25,9 +25,9 @@ public class PlatformComparisonControllerImpl implements PlatformComparisonContr
 
     //GET
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PlatformUsage>> getPlatformComparison(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, @RequestParam("service")Service service)
+    public ResponseEntity<List<PlatformUsage>> getPlatformComparison(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, @RequestParam("service")Service service,  @RequestParam("vendor")String vendor)
     {
-        List<PlatformUsage> platformUsageList = platformsService.getPlatformComparisonData(startDate, endDate, service);
+        List<PlatformUsage> platformUsageList = platformsService.getPlatformComparisonData(startDate, endDate, service, vendor);
         return new ResponseEntity<List<PlatformUsage>>(platformUsageList, HttpStatus.OK);
     }
 }

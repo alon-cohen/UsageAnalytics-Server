@@ -25,9 +25,9 @@ public class ServicesUsageControllerImpl implements ServicesUsageControllerAPI {
 
     //GET
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ServiceUsage>> getServicesUsage(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate)
+    public ResponseEntity<List<ServiceUsage>> getServicesUsage(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, @RequestParam("vendor")String vendor)
     {
-        List<ServiceUsage> platformUsageList = servicesService.getServiceUsage(startDate, endDate);
+        List<ServiceUsage> platformUsageList = servicesService.getServiceUsage(startDate, endDate, vendor);
         return new ResponseEntity<List<ServiceUsage>>(platformUsageList, HttpStatus.OK);
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class TopThreeServicesControllerImpl implements TopThreeServicesControlle
 
     //GET
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ServiceUsage>> getTopThreeServices(){
-        List<ServiceUsage> topThreeServices = servicesService.getTopThreeServices();
+    public ResponseEntity<List<ServiceUsage>> getTopThreeServices(@RequestParam("vendor")String vendor){
+        List<ServiceUsage> topThreeServices = servicesService.getTopThreeServices(vendor);
         return new ResponseEntity<List<ServiceUsage>>(topThreeServices, HttpStatus.OK);
     }
 }
