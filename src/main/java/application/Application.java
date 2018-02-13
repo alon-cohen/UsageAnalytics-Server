@@ -1,10 +1,6 @@
 package application;
 
 
-import application.enums.Platform;
-import application.enums.Service;
-import application.model.PlatformUsage;
-import application.model.PlatformsDayUsage;
 import application.repositories.PlatformDayUsage.PlatformDayUsageRepository;
 import application.services.DataReader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
 @SpringBootApplication
 public class Application {
@@ -38,17 +28,35 @@ public class Application {
 
         return args -> {
 
-            String path1 = "C:/Users/capon/Desktop/IOT/csv's/DX_UsageDailyRprt_2017-11-14.csv";
+            String path1 = "/Users/alonc/Projects/UsageAnalytics-Server/Reports/DX_UsageDailyRprt_2018-02-08.csv";
             File file1 = new File(path1);
-            String path2 = "C:/Users/capon/Desktop/IOT/csv's/DX_UsageDailyRprt_2017-11-16.csv";
+            String path2 = "/Users/alonc/Projects/UsageAnalytics-Server/Reports/DX_UsageDailyRprt_2018-02-09.csv";
             File file2 = new File(path2);
-            String path3 = "C:/Users/capon/Desktop/IOT/csv's/DX_UsageDailyRprt_2017-11-15.csv";
+            String path3 = "/Users/alonc/Projects/UsageAnalytics-Server/Reports/DX_UsageDailyRprt_2018-02-10.csv";
             File file3 = new File(path3);
+            String path4 = "/Users/alonc/Projects/UsageAnalytics-Server/Reports/DX_UsageDailyRprt_2018-02-11.csv";
+            File file4 = new File(path4);
+            String path5 = "/Users/alonc/Projects/UsageAnalytics-Server/Reports/DX_UsageDailyRprt_2018-02-12.csv";
+            File file5 = new File(path5);
+            String path6 = "/Users/alonc/Projects/UsageAnalytics-Server/Reports/DX_UsageDailyRprt_2018-02-13.csv";
+            File file6 = new File(path6);
+            String path7 = "/Users/alonc/Projects/UsageAnalytics-Server/Reports/AB_UsageDailyRprt_2018-02-06.csv";
+            File file7 = new File(path7);
+            String path8 = "/Users/alonc/Projects/UsageAnalytics-Server/Reports/AB_UsageDailyRprt_2018-02-07.csv";
+            File file8 = new File(path8);
+            String path9 = "/Users/alonc/Projects/UsageAnalytics-Server/Reports/AB_UsageDailyRprt_2018-02-08.csv";
+            File file9 = new File(path9);
 
             PlatformDayUsageRepository platformDayUsageRepository;
             dr.insertDataFile(file1);
             dr.insertDataFile(file2);
             dr.insertDataFile(file3);
+            dr.insertDataFile(file4);
+            dr.insertDataFile(file5);
+            dr.insertDataFile(file6);
+            dr.insertDataFile(file7);
+            dr.insertDataFile(file8);
+            dr.insertDataFile(file9);
 
             // save a couple of PlatformUsage
 //            PlatformUsage pu1 = new PlatformUsage(Platform.ALEXA, 500);
