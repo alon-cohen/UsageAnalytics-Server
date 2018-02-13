@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UsageAnalytics.iml" filepath="$PROJECT_DIR$/.idea/modules/UsageAnalytics.iml" />
       <module fileurl="file://$PROJECT_DIR$/UsageAnalytics-Server.iml" filepath="$PROJECT_DIR$/UsageAnalytics-Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/UsageAnalytics-Server.iml" filepath="$PROJECT_DIR$/.idea/modules/UsageAnalytics-Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/UsageAnalytics-Server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/UsageAnalytics-Server_main.iml" group="UsageAnalytics-Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UsageAnalytics-Server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/UsageAnalytics-Server_main.iml" group="UsageAnalytics-Server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/UsageAnalytics-Server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/UsageAnalytics-Server_test.iml" group="UsageAnalytics-Server" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UsageAnalytics_main.iml" filepath="$PROJECT_DIR$/.idea/modules/UsageAnalytics_main.iml" group="UsageAnalytics" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UsageAnalytics_test.iml" filepath="$PROJECT_DIR$/.idea/modules/UsageAnalytics_test.iml" group="UsageAnalytics" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UsageAnalytics-Server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/UsageAnalytics-Server_test.iml" group="UsageAnalytics-Server" />
     </modules>
   </component>
 </project>
